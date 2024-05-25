@@ -31,7 +31,6 @@ export class AuthService {
     });
 
     res.status(HttpStatus.CREATED).json({
-      success: true,
       message: ['signup success'],
     });
   }
@@ -61,7 +60,7 @@ export class AuthService {
       'pariwata-aceh'
     );
 
-    res.json({
+    res.status(HttpStatus.ACCEPTED).json({
       status: 'login',
       token,
       message: ['Login Success'],
