@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Get,
+  Post,
   Put,
   UploadedFile,
   UseInterceptors,
@@ -23,5 +24,11 @@ export class TouristDestinationController {
     @UploadedFile() file: Express.Multer.File
   ) {
     return this.touristDestinationService.postData({ file, dto });
+  }
+  @Post('yeah')
+  get() {
+    return {
+      success: true,
+    };
   }
 }
