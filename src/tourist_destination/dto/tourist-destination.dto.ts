@@ -1,26 +1,26 @@
 import { IsNotEmpty, IsString } from 'class-validator';
 
 class AddTouristDestinationDto {
-  // @IsNotEmpty()
-  // @IsString()
+  @IsNotEmpty()
+  @IsString()
   title: string;
-  // @IsNotEmpty()
-  // @IsString()
-  // desc: string;
-  // @IsNotEmpty()
-  // @IsString()
-  // lat: string;
-  // @IsNotEmpty()
-  // @IsString()
-  // lng: string;
-  // @IsNotEmpty()
-  // @IsString()
-  // locate: string;
-  // @IsNotEmpty()
-  // @IsString()
-  // typeLocation: string;
-  // @IsNotEmpty()
-  // @IsString()
-  // typeSellTicket: string;
+  @IsNotEmpty()
+  @IsString()
+  desc: string;
+  @IsNotEmpty()
+  @IsString()
+  lat: string;
+  @IsNotEmpty()
+  @IsString()
+  lng: string;
+  @IsNotEmpty()
+  @IsString()
+  locate: string;
+  @IsNotEmpty()
+  @IsString()
+  typeLocation: string;
+  @IsNotEmpty()
+  @IsString()
+  typeSellTicket: string;
 }
 export { AddTouristDestinationDto };
