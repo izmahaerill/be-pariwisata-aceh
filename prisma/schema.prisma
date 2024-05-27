@@ -22,6 +22,27 @@ model User{
   createdAt DateTime @default(now())
   updateAt DateTime @updatedAt
 }
+ 
+model TouristDestination{
+  id Int @id @default(autoincrement())
+  url String?
+  title String
+  desc String?
+  location Location?
+  locate String?
+  typeLocation String?
+  typeSellTicket String?
+
+}
+
+model Location{
+  id Int @id @default(autoincrement())
+  lat String
+  lng String
+  touristDestination TouristDestination @relation(fields: [touristDestinationId], references: [id])
+  touristDestinationId Int @unique
+}
+
 
 enum Role {
   USER

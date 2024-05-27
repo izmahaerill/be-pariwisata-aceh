@@ -15,8 +15,4 @@ export class AuthController {
   signin(@Query() dto: SigninDto, @Res() res: Response) {
     return this.authService.signin({ dto, res });
   }
-  @Get('test')
-  heh() {
-    return { data: 'hehe' };
-  }
 }
