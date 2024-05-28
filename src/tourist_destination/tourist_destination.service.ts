@@ -43,11 +43,15 @@ export class TouristDestinationService {
     try {
       const { data, error } = await this.supabaseService.supabase.storage
         .from('tourist-destination')
-        .upload(`${uniqueValue}-${file.originalname}`, file.buffer, {
-          cacheControl: '3600',
-          upsert: true,
-          contentType: file.mimetype,
-        });
+        .upload(
+          `${uniqueValue}-${file.originalname || 'tourist-destination.jpg'}`,
+          file.buffer,
+          {
+            cacheControl: '3600',
+            upsert: true,
+            contentType: file.mimetype,
+          }
+        );
 
       if (error)
         return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
@@ -57,6 +61,11 @@ export class TouristDestinationService {
       const { data: url } = this.supabaseService.supabase.storage
         .from('public-bucket')
         .getPublicUrl(data.path);
+
+      const publicUrl = url.publicUrl.replace(
+        'public-bucket',
+        'tourist-destination'
+      );
 
       await this.prismaClient.touristDestination.create({
         data: {
@@ -71,7 +80,7 @@ export class TouristDestinationService {
           },
           typeLocation,
           typeSellTicket,
-          url: url.publicUrl,
+          url: publicUrl,
         },
       });
 
@@ -82,7 +91,7 @@ export class TouristDestinationService {
     } catch (error) {
       if (error)
         return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
-          message: ['failed add data'],
+          message: ['failed add data', error.message],
         });
     }
   }
