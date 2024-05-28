@@ -1,7 +1,7 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { SupabaseService } from 'src/supabase/supabase.service';
-import { AddTouristDestinationDto } from './dto';
+import { AddTouristDestinationDto, TouristDestinationDto } from './dto';
 import { Response } from 'express';
 
 @Injectable()
@@ -25,6 +25,47 @@ export class TouristDestinationService {
     return {
       data,
     };
+  }
+  async getDataWithId({
+    dto,
+    res,
+  }: {
+    dto: TouristDestinationDto;
+    res: Response;
+  }) {
+    try {
+      if (!Number(dto.id)) {
+        throw new Error('id must be a number');
+      }
+
+      const id = parseInt(dto.id);
+      const data = await this.prismaClient.touristDestination.findUnique({
+        where: {
+          id: id,
+        },
+        include: {
+          location: {
+            select: {
+              lat: true,
+              lng: true,
+            },
+          },
+        },
+      });
+      if (!data) {
+        return res.status(HttpStatus.NOT_FOUND).json({
+          message: ['Data with that id not found'],
+        });
+      }
+      return res.status(HttpStatus.OK).json({
+        message: ['get data success'],
+        data,
+      });
+    } catch (error) {
+      return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
+        message: [error.message],
+      });
+    }
   }
 
   async postData({

@@ -23,4 +23,10 @@ class AddTouristDestinationDto {
   @IsString()
   typeSellTicket: string;
 }
-export { AddTouristDestinationDto };
+
+class TouristDestinationDto {
+  @IsNotEmpty()
+  @IsString()
+  id: string;
+}
+export { AddTouristDestinationDto, TouristDestinationDto };
