@@ -284,6 +284,9 @@ export class TouristDestinationService {
       return res.status(HttpStatus.ACCEPTED).json({
         status: 'success',
         message: ['delete data success'],
+        data: {
+          id: parseInt(param.id),
+        },
       });
     } catch (error) {
       return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
