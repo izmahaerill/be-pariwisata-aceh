@@ -1,17 +1,20 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Post,
+  Put,
   Res,
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
 import { TouristDestinationService } from './tourist_destination.service';
-import { AddTouristDestinationDto, TouristDestinationDto } from './dto';
+import { UpsertTouristDestinationDto, TouristDestinationDto } from './dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Response } from 'express';
+
 @Controller('tourist-destination')
 export class TouristDestinationController {
   constructor(private touristDestinationService: TouristDestinationService) {}
@@ -20,17 +23,31 @@ export class TouristDestinationController {
     return this.touristDestinationService.getAllData();
   }
   @Get('/:id')
-  getWithId(@Param() dto: TouristDestinationDto, @Res() res: Response) {
-    return this.touristDestinationService.getDataWithId({ dto, res });
+  getWithId(@Param() param: TouristDestinationDto, @Res() res: Response) {
+    return this.touristDestinationService.getDataWithId({ param, res });
   }
 
   @Post('add')
   @UseInterceptors(FileInterceptor('file'))
   postOne(
-    @Body() dto: AddTouristDestinationDto,
+    @Body() dto: UpsertTouristDestinationDto,
     @UploadedFile() file: Express.Multer.File,
     @Res() res: Response
   ) {
     return this.touristDestinationService.postData({ file, dto, res });
+  }
+  @Put('/:id')
+  @UseInterceptors(FileInterceptor('file'))
+  updateOne(
+    @Param() param: TouristDestinationDto,
+    @UploadedFile() file: Express.Multer.File,
+    @Res() res: Response,
+    @Body() dto: UpsertTouristDestinationDto
+  ) {
+    return this.touristDestinationService.updateData({ param, file, res, dto });
+  }
+  @Delete('/:id')
+  deleteOne(@Param() param: TouristDestinationDto, @Res() res: Response) {
+    return this.touristDestinationService.deleteData({ param, res });
   }
 }

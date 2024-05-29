@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsString } from 'class-validator';
 
-class AddTouristDestinationDto {
+class UpsertTouristDestinationDto {
   @IsNotEmpty()
   @IsString()
   title: string;
@@ -29,4 +29,4 @@ class TouristDestinationDto {
   @IsString()
   id: string;
 }
-export { AddTouristDestinationDto, TouristDestinationDto };
+export { UpsertTouristDestinationDto, TouristDestinationDto };
