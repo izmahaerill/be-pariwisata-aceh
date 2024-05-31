@@ -5,9 +5,16 @@ import { TouristDestinationService } from './tourist_destination/tourist_destina
 import { TouristDestinationController } from './tourist_destination/tourist_destination.controller';
 import { TouristDestinationModule } from './tourist_destination/tourist_destination.module';
 import { SupabaseModule } from './supabase/supabase.module';
+import { FestivalModule } from './festival/festival.module';
 
 @Module({
-  imports: [AuthModule, PrismaModule, TouristDestinationModule, SupabaseModule],
+  imports: [
+    AuthModule,
+    PrismaModule,
+    TouristDestinationModule,
+    SupabaseModule,
+    FestivalModule,
+  ],
   providers: [TouristDestinationService],
   controllers: [TouristDestinationController],
 })

@@ -43,6 +43,15 @@ model Location{
   touristDestinationId Int @unique
 }
 
+model Festival {
+  id Int @id @default(autoincrement())
+  title String
+  locate String
+  startDate DateTime
+  endDate DateTime
+  desc String
+}
+
 
 enum Role {
   USER
