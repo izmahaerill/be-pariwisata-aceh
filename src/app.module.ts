@@ -6,6 +6,7 @@ import { TouristDestinationController } from './tourist_destination/tourist_dest
 import { TouristDestinationModule } from './tourist_destination/tourist_destination.module';
 import { SupabaseModule } from './supabase/supabase.module';
 import { FestivalModule } from './festival/festival.module';
+import { NewsModule } from './news/news.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { FestivalModule } from './festival/festival.module';
     TouristDestinationModule,
     SupabaseModule,
     FestivalModule,
+    NewsModule,
   ],
   providers: [TouristDestinationService],
   controllers: [TouristDestinationController],

@@ -19,8 +19,8 @@ import { Response } from 'express';
 export class TouristDestinationController {
   constructor(private touristDestinationService: TouristDestinationService) {}
   @Get('all')
-  getAll() {
-    return this.touristDestinationService.getAllData();
+  getAll(@Res() res: Response) {
+    return this.touristDestinationService.getAllData({ res });
   }
   @Get('/:id')
   getWithId(@Param() param: TouristDestinationDto, @Res() res: Response) {

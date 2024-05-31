@@ -5,6 +5,7 @@ import {
   Get,
   Param,
   Post,
+  Put,
   Res,
 } from '@nestjs/common';
 import { FestivalService } from './festival.service';
@@ -18,7 +19,7 @@ export class FestivalController {
   addFestival(@Body() dto: UpsertFestivalDto, @Res() res: Response) {
     return this.festivalService.addFestival({ dto, res });
   }
-  @Post('/:id')
+  @Put('/:id')
   updateFestival(
     @Body() dto: UpsertFestivalDto,
     @Res() res: Response,
@@ -33,5 +34,9 @@ export class FestivalController {
   @Get('all')
   getFestivals(@Res() res: Response) {
     return this.festivalService.getFestivals({ res });
+  }
+  @Get('/:id')
+  getDetailFestival(@Res() res: Response, @Param() param: DetailDto) {
+    return this.festivalService.getFestivalWithId({ res, param });
   }
 }

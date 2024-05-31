@@ -52,6 +52,14 @@ model Festival {
   desc String
 }
 
+model News{
+  id Int @id @default(autoincrement())
+  tagLine String
+  dateRelease DateTime
+  desc String
+  url String
+}
+
 
 enum Role {
   USER

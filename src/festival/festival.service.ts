@@ -122,4 +122,34 @@ export class FestivalService {
       });
     }
   }
+  async getFestivalWithId({ res, param }: { res: Response; param: DetailDto }) {
+    try {
+      if (!Number(param.id))
+        return res.status(HttpStatus.FORBIDDEN).json({
+          message: ['id must be number'],
+        });
+      const dataIsExist = await this.prismaClient.festival.findFirst({
+        where: {
+          id: parseInt(param.id),
+        },
+      });
+      if (!dataIsExist)
+        return res.status(HttpStatus.NOT_FOUND).json({
+          message: ['data not found'],
+        });
+      const data = await this.prismaClient.festival.findUnique({
+        where: {
+          id: parseInt(param.id),
+        },
+      });
+      return res.status(HttpStatus.OK).json({
+        message: 'get detail data success',
+        data,
+      });
+    } catch (error) {
+      return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
+        message: [error.message],
+      });
+    }
+  }
 }
