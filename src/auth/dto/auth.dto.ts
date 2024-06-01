@@ -9,6 +9,8 @@ class SignupDto {
   email: string;
   @IsNotEmpty()
   password: string;
+  @IsNotEmpty()
+  role: 'USER' | 'ADMIN' = 'USER';
 }
 
 class SigninDto {
@@ -17,6 +19,8 @@ class SigninDto {
   email: string;
   @IsNotEmpty()
   password: string;
+  @IsNotEmpty()
+  role: 'USER' | 'ADMIN' = 'USER';
 }
 
 export { SigninDto, SignupDto };
